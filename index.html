@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>XV Años Lorianna</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Montserrat:wght@300;500&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:Montserrat;
+background:linear-gradient(#ffb6d9,#ffdff0);
+text-align:center;
+color:#333;
+}
+
+.hero{
+height:100vh;
+background:url("foto1.jpg") center/cover no-repeat;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+color:white;
+text-shadow:0 3px 10px rgba(0,0,0,0.6);
+}
+
+.hero h1{
+font-family:Great Vibes;
+font-size:70px;
+margin:0;
+}
+
+.hero h2{
+font-size:28px;
+letter-spacing:3px;
+}
+
+section{
+padding:70px 20px;
+}
+
+.card{
+background:white;
+max-width:650px;
+margin:auto;
+padding:40px;
+border-radius:20px;
+box-shadow:0 20px 40px rgba(0,0,0,0.2);
+animation:fadeUp 1s ease;
+}
+
+.gold{
+color:#d4af37;
+font-family:Playfair Display;
+font-size:30px;
+}
+
+.countdown{
+font-size:30px;
+margin-top:20px;
+font-weight:bold;
+color:#d4af37;
+}
+
+button{
+background:black;
+color:white;
+border:none;
+padding:16px 35px;
+border-radius:40px;
+font-size:17px;
+cursor:pointer;
+margin-top:20px;
+transition:.3s;
+}
+
+button:hover{
+background:#444;
+transform:scale(1.05);
+}
+
+.logo{
+width:230px;
+margin-bottom:20px;
+}
+
+.footer{
+background:black;
+color:white;
+padding:40px;
+}
+
+@keyframes fadeUp{
+from{opacity:0; transform:translateY(40px);}
+to{opacity:1; transform:translateY(0);}
+}
+
+.sparkles{
+position:fixed;
+width:100%;
+height:100%;
+pointer-events:none;
+background-image:url("https://i.imgur.com/9QZ7K7y.png");
+animation:move 25s linear infinite;
+opacity:.25;
+}
+
+@keyframes move{
+0%{background-position:0 0}
+100%{background-position:1000px 1000px}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sparkles"></div>
+
+<audio autoplay loop>
+<source src="Aqua - Barbie Girl.mp3" type="audio/mpeg">
+</audio>
+
+<section class="hero">
+
+<img src="logo.png" class="logo">
+
+<h1>Lorianna</h1>
+
+<h2>MIS XV AÑOS</h2>
+
+<p>02 • Mayo • 2026</p>
+<p>4:30 PM</p>
+
+</section>
+
+<section>
+
+<div class="card">
+
+<h2 class="gold">Estás Invitado</h2>
+
+<p>
+Mis 15 años marcan el comienzo de una nueva etapa en mi vida.
+Una etapa maravillosa donde el amor y la alegría están conmigo.
+Por eso te espero para que juntos festejemos mi primera ilusión.
+</p>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="card">
+
+<h2 class="gold">Cuenta Regresiva</h2>
+
+<div class="countdown" id="countdown"></div>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="card">
+
+<h2 class="gold">Lugar del Evento</h2>
+
+<p>Hotel y Restaurante Los Pinos</p>
+
+<button onclick="window.open('https://maps.app.goo.gl/6bnJAt3sSRRRQpNd7">
+Ver ubicación
+</button>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="card">
+
+<h2 class="gold">Código de Vestimenta</h2>
+
+<p>Viste solo de <b>NEGRO</b> y celebra conmigo en mi noche mágica.</p>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="card">
+
+<h2 class="gold">Confirmar Asistencia</h2>
+
+<button onclick="window.open('https://wa.me/50687240469')">
+Confirmar por WhatsApp
+</button>
+
+</div>
+
+</section>
+
+<section class="footer">
+
+<p>Te espero para celebrar esta noche mágica ✨</p>
+
+</section>
+
+<script>
+
+const eventDate = new Date("May 2, 2026 16:30:00").getTime();
+
+setInterval(function(){
+
+const now = new Date().getTime();
+const distance = eventDate - now;
+
+const days = Math.floor(distance/(1000*60*60*24));
+const hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+const minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+const seconds = Math.floor((distance%(1000*60))/1000);
+
+document.getElementById("countdown").innerHTML =
+days+" días "+hours+" h "+minutes+" m "+seconds+" s";
+
+},1000);
+
+</script>
+
+</body>
+</html>
