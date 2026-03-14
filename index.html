@@ -14,21 +14,22 @@
 body{
 margin:0;
 font-family:Montserrat;
-background:#ffd6ea;
+background:linear-gradient(180deg,#ffb3d9,#ffdff2);
 text-align:center;
 color:#333;
 }
 
+/* portada */
+
 .hero{
-height:100vh;
-background:url("foto1.jpg") center/cover no-repeat;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
+padding:40px 20px;
+background:linear-gradient(180deg,#ff69b4,#ffc6e5);
 color:white;
-text-shadow:0 2px 8px rgba(0,0,0,0.6);
-padding:20px;
+}
+
+.logo{
+width:160px;
+margin-bottom:15px;
 }
 
 .hero h1{
@@ -37,9 +38,22 @@ font-size:55px;
 margin:10px 0;
 }
 
-.hero p{
-font-size:18px;
+/* foto */
+
+.photo-container{
+display:flex;
+justify-content:center;
+margin-top:20px;
 }
+
+.photo-container img{
+width:85%;
+max-width:350px;
+border-radius:20px;
+box-shadow:0 15px 30px rgba(0,0,0,0.25);
+}
+
+/* tarjetas */
 
 section{
 padding:40px 20px;
@@ -56,7 +70,7 @@ box-shadow:0 10px 25px rgba(0,0,0,0.15);
 
 .gold{
 color:#d4af37;
-font-size:26px;
+font-size:24px;
 margin-bottom:10px;
 }
 
@@ -71,15 +85,24 @@ margin-top:20px;
 cursor:pointer;
 }
 
-button:hover{
-background:#333;
-}
-
 .countdown{
-font-size:24px;
+font-size:22px;
 font-weight:bold;
 color:#d4af37;
 }
+
+/* espacio reservado */
+
+.reserved{
+background:#ff69b4;
+color:white;
+padding:25px;
+border-radius:20px;
+font-size:18px;
+margin-top:20px;
+}
+
+/* botón música */
 
 .music{
 position:fixed;
@@ -93,11 +116,12 @@ font-size:20px;
 cursor:pointer;
 }
 
+/* footer */
+
 .footer{
 background:black;
 color:white;
 padding:25px;
-font-size:14px;
 }
 
 </style>
@@ -112,17 +136,25 @@ font-size:14px;
 
 <div class="music" onclick="toggleMusic()">🎵</div>
 
+<!-- portada -->
+
 <section class="hero">
-  
+
 <img src="logo.jpg" class="logo">
-  
+
 <h1>Lorianna</h1>
 
 <p>Mis XV Años</p>
 
 <p>02 Mayo 2026 • 4:30 PM</p>
 
+<div class="photo-container">
+<img src="foto1.jpg">
+</div>
+
 </section>
+
+<!-- invitación -->
 
 <section>
 
@@ -140,6 +172,24 @@ Por eso te espero para que juntos festejemos mi primera ilusión.
 
 </section>
 
+<!-- espacio reservado -->
+
+<section>
+
+<div class="card">
+
+<h2 class="gold">Reservación</h2>
+
+<div class="reserved">
+✨ Hemos reservado <b>1 espacio</b> especialmente para ti.
+</div>
+
+</div>
+
+</section>
+
+<!-- cuenta regresiva -->
+
 <section>
 
 <div class="card">
@@ -152,82 +202,6 @@ Por eso te espero para que juntos festejemos mi primera ilusión.
 
 </section>
 
-<section>
+<!-- lugar -->
 
-<div class="card">
-
-<h2 class="gold">Lugar del Evento</h2>
-
-<p>Hotel y Restaurante Los Pinos</p>
-
-<button onclick="window.open('https://maps.google.com/?q=9.395985350939837,-83.71526561789925')">
-Ver ubicación
-</button>
-
-</div>
-
-</section>
-
-<section>
-
-<div class="card">
-
-<h2 class="gold">Código de Vestimenta</h2>
-
-<p>Viste solo de <b>NEGRO</b> y celebra conmigo en mi noche mágica.</p>
-
-</div>
-
-</section>
-
-<section>
-
-<div class="card">
-
-<h2 class="gold">Confirmar Asistencia</h2>
-
-<button onclick="window.open('https://wa.me/50687240469')">
-Confirmar por WhatsApp
-</button>
-
-</div>
-
-</section>
-
-<div class="footer">
-Te espero para celebrar esta noche mágica ✨
-</div>
-
-<script>
-
-function toggleMusic(){
-let music = document.getElementById("music");
-
-if(music.paused){
-music.play();
-}else{
-music.pause();
-}
-}
-
-const eventDate = new Date("May 2, 2026 16:30:00").getTime();
-
-setInterval(function(){
-
-const now = new Date().getTime();
-const distance = eventDate - now;
-
-const days = Math.floor(distance/(1000*60*60*24));
-const hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
-const minutes = Math.floor((distance%(1000*60*60))/(1000*60));
-
-document.getElementById("countdown").innerHTML =
-days+" días "+hours+"h "+minutes+"m";
-
-},1000);
-
-</script>
-
-</body>
-</html>
-
+<s
