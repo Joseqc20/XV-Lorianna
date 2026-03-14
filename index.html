@@ -1,207 +1,271 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lorianna's XV Años - Invitación de Gala</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --barbie-pink: #e0218a;
+            --gold: #d4af37;
+            --gold-light: #f4e1a1;
+            --black: #1a1a1a;
+            --soft-pink: #fff0f5;
+        }
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        body, html {
+            margin: 0; padding: 0; overflow-x: hidden;
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--black); /* Fondo base negro para contraste */
+            scroll-behavior: smooth;
+        }
 
-<title>XV Lorianna</title>
+        /* --- PANTALLA DE ENTRADA (MÚSICA) --- */
+        #overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--black); display: flex; justify-content: center;
+            align-items: center; z-index: 9999; color: white;
+            text-align: center; transition: 0.8s;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+        .enter-btn {
+            padding: 15px 40px; border: 2px solid var(--barbie-pink);
+            background: transparent; color: white; font-size: 1.2rem;
+            cursor: pointer; border-radius: 50px; letter-spacing: 2px;
+            box-shadow: 0 0 20px var(--barbie-pink);
+        }
 
-<style>
+        /* --- PORTADA PRINCIPAL (DISEÑO INVERTIDO) --- */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Pantalla completa para la experiencia de entrada */
+            /* CAMBIO: El logo y el brillo son el FONDO grande */
+            background: url('logo.jpg') no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
 
-body{
-margin:0;
-font-family:Montserrat;
-background:linear-gradient(180deg,#ffb3d9,#ffdff2);
-text-align:center;
-color:#333;
-}
+        /* Superposición suave para asegurar legibilidad */
+        .hero::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+            z-index: 1;
+        }
 
-/* portada */
+        /* --- EL CAMAFEO CENTRAL (FOTO PEQUEÑA) --- */
+        .cameo-frame {
+            position: relative;
+            z-index: 2; /* Por encima de la superposición */
+            width: 250px; /* Tamaño elegante y controlado */
+            height: 350px;
+            border-radius: 125px; /* Forma de óvalo/camafeo */
+            border: 8px solid var(--gold);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.8), inset 0 0 15px rgba(212, 175, 55, 0.5);
+            overflow: hidden; /* Recorta la foto a la forma */
+            transition: transform 0.5s;
+        }
 
-.hero{
-padding:40px 20px;
-background:linear-gradient(180deg,#ff69b4,#ffc6e5);
-color:white;
-}
+        /* Decoración de filigrana dorada para el camafeo */
+        .cameo-frame::before {
+            content: '✨'; position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            font-size: 2rem; color: var(--gold-light); z-index: 3;
+        }
 
-.logo{
-width:160px;
-margin-bottom:15px;
-}
+        /* CAMBIO: La foto real de Lorianna está DENTRO del camafeo */
+        .cameo-photo {
+            width: 100%; height: 100%;
+            object-fit: cover; /* Asegura que la foto llene el óvalo */
+            object-position: center top;
+            filter: sepia(10%) contrast(110%);
+        }
 
-.hero h1{
-font-family:Great Vibes;
-font-size:55px;
-margin:10px 0;
-}
+        /* Texto de bienvenida bajo el camafeo */
+        .hero-text {
+            position: relative; z-index: 2; color: white; text-align: center; margin-top: 20px;
+        }
 
-/* foto */
+        .hero-text h1 {
+            font-family: 'Pinyon Script', cursive; font-size: 4rem;
+            color: var(--barbie-pink); margin: 0; text-shadow: 2px 4px 6px rgba(0,0,0,0.5);
+        }
 
-.photo-container{
-display:flex;
-justify-content:center;
-margin-top:20px;
-}
+        .hero-text p { letter-spacing: 4px; font-size: 0.8rem; text-transform: uppercase; margin: 10px 0; }
 
-.photo-container img{
-width:85%;
-max-width:350px;
-border-radius:20px;
-box-shadow:0 15px 30px rgba(0,0,0,0.25);
-}
+        /* --- CUENTA REGRESIVA --- */
+        .countdown-container {
+            background: var(--soft-pink); padding: 30px 10px;
+            display: flex; justify-content: center; gap: 15px;
+            border-top: 2px solid var(--gold); border-bottom: 2px solid var(--gold);
+        }
 
-/* tarjetas */
+        .timer-box {
+            background: white; border: 1.5px solid var(--gold);
+            padding: 12px; border-radius: 12px; min-width: 65px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: center;
+        }
 
-section{
-padding:40px 20px;
-}
+        .timer-number { display: block; font-size: 1.6rem; font-weight: 600; color: var(--barbie-pink); }
+        .timer-label { font-size: 0.7rem; text-transform: uppercase; color: var(--gold); font-weight: bold; }
 
-.card{
-background:white;
-padding:30px;
-border-radius:20px;
-max-width:500px;
-margin:auto;
-box-shadow:0 10px 25px rgba(0,0,0,0.15);
-}
+        /* --- SECCIONES DE CONTENIDO (TEMATICA NEGRO/PINK) --- */
+        section { padding: 60px 25px; text-align: center; color: white; background: var(--black); }
 
-.gold{
-color:#d4af37;
-font-size:24px;
-margin-bottom:10px;
-}
+        .reservation-note {
+            background: var(--gold); color: white; padding: 12px 25px;
+            border-radius: 50px; display: inline-block;
+            margin-bottom: 25px; font-weight: 600; font-size: 0.9rem;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
 
-button{
-background:black;
-color:white;
-border:none;
-padding:15px 30px;
-border-radius:30px;
-font-size:16px;
-margin-top:20px;
-cursor:pointer;
-}
+        .phrase {
+            font-family: 'Pinyon Script', cursive; font-size: 2rem;
+            color: var(--barbie-pink); padding: 20px; line-height: 1.4;
+            background: linear-gradient(to right, transparent, rgba(224, 33, 138, 0.1), transparent);
+        }
 
-.countdown{
-font-size:22px;
-font-weight:bold;
-color:#d4af37;
-}
+        .info-card {
+            border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 25px; padding: 35px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5); margin: 20px auto; max-width: 500px;
+            background: rgba(255, 255, 255, 0.05);
+        }
 
-/* espacio reservado */
+        .dress-code { background-color: #111; padding: 70px 25px; }
 
-.reserved{
-background:#ff69b4;
-color:white;
-padding:25px;
-border-radius:20px;
-font-size:18px;
-margin-top:20px;
-}
+        .btn {
+            display: inline-block; background-color: var(--barbie-pink);
+            color: white; padding: 18px 40px; text-decoration: none;
+            border-radius: 50px; font-weight: 600; margin: 20px 0;
+            transition: 0.3s; box-shadow: 0 5px 20px rgba(224, 33, 138, 0.5);
+            letter-spacing: 1px;
+        }
 
-/* botón música */
+        .btn:active { transform: scale(0.95); }
 
-.music{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#ff69b4;
-color:white;
-padding:15px;
-border-radius:50%;
-font-size:20px;
-cursor:pointer;
-}
+        h2 { font-family: 'Pinyon Script', cursive; font-size: 3.2rem; color: var(--gold); margin: 10px 0; }
 
-/* footer */
+        footer { padding: 40px; font-size: 0.75rem; color: #555; background: #0a0a0a; text-align: center; }
 
-.footer{
-background:black;
-color:white;
-padding:25px;
-}
-
-</style>
-
+        /* --- AJUSTES PARA CELULAR --- */
+        @media (max-width: 480px) {
+            .cameo-frame { width: 200px; height: 280px; border-radius: 100px; border-width: 6px; }
+            .hero-text h1 { font-size: 3.2rem; }
+            .hero { height: 85vh; } /* Un poco más corto en móviles para ver la cuenta regresiva */
+            h2 { font-size: 2.8rem; }
+            .timer-box { min-width: 55px; padding: 8px; }
+        }
+    </style>
 </head>
-
 <body>
 
-<audio id="music">
-<source src="Aqua - Barbie Girl.mp3" type="audio/mpeg">
-</audio>
+    <div id="overlay">
+        <div>
+            <h1 style="font-family:'Pinyon Script'; font-size: 3.5rem; color: var(--barbie-pink);">Lorianna's XV</h1>
+            <p style="letter-spacing: 3px; font-size: 0.8rem; margin-bottom: 30px;">UNA NOCHE MÁGICA</p>
+            <button class="enter-btn" onclick="startExperience()">ENTRAR</button>
+        </div>
+    </div>
 
-<div class="music" onclick="toggleMusic()">🎵</div>
+    <audio id="bgMusic" loop>
+        <source src="Aqua - Barbie Girl.mp3" type="audio/mpeg">
+    </audio>
 
-<!-- portada -->
+    <div class="hero">
+        <div class="cameo-frame">
+            <img src="foto1.jpg" alt="Lorianna Retrato" class="cameo-photo">
+        </div>
+        
+        <div class="hero-text">
+            <h1>Lorianna</h1>
+            <p>02 | 05 | 2026</p>
+        </div>
+    </div>
 
-<section class="hero">
+    <div class="countdown-container">
+        <div class="timer-box"><span class="timer-number" id="days">00</span><span class="timer-label">Días</span></div>
+        <div class="timer-box"><span class="timer-number" id="hours">00</span><span class="timer-label">Hrs</span></div>
+        <div class="timer-box"><span class="timer-number" id="minutes">00</span><span class="timer-label">Min</span></div>
+        <div class="timer-box"><span class="timer-number" id="seconds">00</span><span class="timer-label">Seg</span></div>
+    </div>
 
-<img src="logo.jpg" class="logo">
+    <section>
+        <div class="phrase">
+            "Mis 15 años marcan el comienzo de una nueva etapa en mi vida. Una etapa maravillosa donde el amor y la alegría están conmigo."
+        </div>
+    </section>
 
-<h1>Lorianna</h1>
+    <section>
+        <div class="reservation-note">✨ Se ha reservado 1 espacio en tu honor</div>
+        <h2>La Celebración</h2>
+        <div class="info-card">
+            <p style="font-size: 1.2rem; letter-spacing: 1px; color: var(--soft-pink);"><strong>Sábado, 02 de Mayo, 2026</strong></p>
+            <p style="color: var(--barbie-pink); font-weight: 600; font-size: 1.1rem;">4:30 PM</p>
+            <div style="height: 1px; background: rgba(212,175,55,0.2); margin: 20px 0;"></div>
+            <p><strong>Hotel y Restaurante los Pinos</strong></p>
+            <a href="https://maps.app.goo.gl/6bnJAt3sSRRRQpNd7" target="_blank" class="btn">VER UBICACIÓN</a>
+        </div>
+    </section>
 
-<p>Mis XV Años</p>
+    <section class="dress-code">
+        <div style="font-size: 3rem; margin-bottom: 10px;">👗</div>
+        <h2 style="color: white;">Código de Vestimenta</h2>
+        <p style="letter-spacing: 3px; font-weight: 600; color: var(--gold);">SOLO NEGRO</p>
+        <p style="opacity: 0.8; max-width: 400px; margin: 10px auto;">Viste solo de negro y celebra conmigo en mi noche mágica.</p>
+    </section>
 
-<p>02 Mayo 2026 • 4:30 PM</p>
+    <section>
+        <div style="font-size: 3rem;">✉️</div>
+        <h2>Lluvia de Sobres</h2>
+        <p style="max-width: 500px; margin: 0 auto; opacity: 0.9;">La quinceañera desea lluvia de sobres para así cumplir con algunos de sus sueños y metas.</p>
+    </section>
 
-<div class="photo-container">
-<img src="foto1.jpg">
-</div>
+    <section style="background-color: #0d0d0d;">
+        <h2>¿Nos acompañas?</h2>
+        <p style="opacity: 0.8;">Tu confirmación es el mejor regalo.</p>
+        <a href="https://wa.me/50687240469?text=Hola+Lorianna!+Confirmo+mi+asistencia+a+tu+fiesta+de+XV+años." class="btn" style="background-color: #25d366; box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);">CONFIRMAR POR WHATSAPP</a>
+    </section>
 
-</section>
+    <footer>
+        <p>Lorianna's XV Años © 2026</p>
+        <p style="font-size: 0.6rem; margin-top: 10px; opacity: 0.3;">Diseñado con elegancia para una noche inolvidable</p>
+    </footer>
 
-<!-- invitación -->
+    <script>
+        // Función para iniciar música y quitar el overlay
+        function startExperience() {
+            const music = document.getElementById('bgMusic');
+            music.play().catch(e => console.log("Audio play blocked"));
+            
+            const overlay = document.getElementById('overlay');
+            overlay.style.opacity = '0';
+            setTimeout(() => { overlay.style.display = 'none'; }, 800);
+        }
 
-<section>
+        // Lógica de la Cuenta Regresiva para el 2 de Mayo de 2026 a las 4:30 PM
+        const eventDate = new Date("May 2, 2026 16:30:00").getTime();
 
-<div class="card">
+        const updateTimer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = eventDate - now;
 
-<h2 class="gold">Estás Invitado</h2>
+            const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((distance % (1000 * 60)) / 1000);
 
-<p>
-Mis 15 años marcan el comienzo de una nueva etapa en mi vida.
-Una etapa maravillosa donde el amor y la alegría están conmigo.
-Por eso te espero para que juntos festejemos mi primera ilusión.
-</p>
+            document.getElementById("days").innerHTML = d < 10 ? "0" + d : d;
+            document.getElementById("hours").innerHTML = h < 10 ? "0" + h : h;
+            document.getElementById("minutes").innerHTML = m < 10 ? "0" + m : m;
+            document.getElementById("seconds").innerHTML = s < 10 ? "0" + s : s;
 
-</div>
-
-</section>
-
-<!-- espacio reservado -->
-
-<section>
-
-<div class="card">
-
-<h2 class="gold">Reservación</h2>
-
-<div class="reserved">
-✨ Hemos reservado <b>1 espacio</b> especialmente para ti.
-</div>
-
-</div>
-
-</section>
-
-<!-- cuenta regresiva -->
-
-<section>
-
-<div class="card">
-
-<h2 class="gold">Cuenta Regresiva</h2>
-
-<div class="countdown" id="countdown"></div>
-
-</div>
-
-</section>
-
-<!-- lugar -->
-
-<s
+            if (distance < 0) {
+                clearInterval(updateTimer);
+                document.querySelector(".countdown-container").innerHTML = "<p style='color:var(--barbie-pink); font-weight:bold; width:100%; text-align:center;'>¡EL GRAN DÍA HA LLEGADO!</p>";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
