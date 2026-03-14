@@ -5,16 +5,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>XV Años Lorianna</title>
+<title>XV Lorianna</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Montserrat:wght@300;500&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
 
 <style>
 
 body{
 margin:0;
 font-family:Montserrat;
-background:linear-gradient(#ffb6d9,#ffdff0);
+background:#ffd6ea;
 text-align:center;
 color:#333;
 }
@@ -27,93 +27,77 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 color:white;
-text-shadow:0 3px 10px rgba(0,0,0,0.6);
+text-shadow:0 2px 8px rgba(0,0,0,0.6);
+padding:20px;
 }
 
 .hero h1{
 font-family:Great Vibes;
-font-size:70px;
-margin:0;
+font-size:55px;
+margin:10px 0;
 }
 
-.hero h2{
-font-size:28px;
-letter-spacing:3px;
+.hero p{
+font-size:18px;
 }
 
 section{
-padding:70px 20px;
+padding:40px 20px;
 }
 
 .card{
 background:white;
-max-width:650px;
-margin:auto;
-padding:40px;
+padding:30px;
 border-radius:20px;
-box-shadow:0 20px 40px rgba(0,0,0,0.2);
-animation:fadeUp 1s ease;
+max-width:500px;
+margin:auto;
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
 }
 
 .gold{
 color:#d4af37;
-font-family:Playfair Display;
-font-size:30px;
-}
-
-.countdown{
-font-size:30px;
-margin-top:20px;
-font-weight:bold;
-color:#d4af37;
+font-size:26px;
+margin-bottom:10px;
 }
 
 button{
 background:black;
 color:white;
 border:none;
-padding:16px 35px;
-border-radius:40px;
-font-size:17px;
-cursor:pointer;
+padding:15px 30px;
+border-radius:30px;
+font-size:16px;
 margin-top:20px;
-transition:.3s;
+cursor:pointer;
 }
 
 button:hover{
-background:#444;
-transform:scale(1.05);
+background:#333;
 }
 
-.logo{
-width:230px;
-margin-bottom:20px;
+.countdown{
+font-size:24px;
+font-weight:bold;
+color:#d4af37;
+}
+
+.music{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#ff69b4;
+color:white;
+padding:15px;
+border-radius:50%;
+font-size:20px;
+cursor:pointer;
 }
 
 .footer{
 background:black;
 color:white;
-padding:40px;
-}
-
-@keyframes fadeUp{
-from{opacity:0; transform:translateY(40px);}
-to{opacity:1; transform:translateY(0);}
-}
-
-.sparkles{
-position:fixed;
-width:100%;
-height:100%;
-pointer-events:none;
-background-image:url("https://i.imgur.com/9QZ7K7y.png");
-animation:move 25s linear infinite;
-opacity:.25;
-}
-
-@keyframes move{
-0%{background-position:0 0}
-100%{background-position:1000px 1000px}
+padding:25px;
+font-size:14px;
 }
 
 </style>
@@ -122,22 +106,19 @@ opacity:.25;
 
 <body>
 
-<div class="sparkles"></div>
-
-<audio autoplay loop>
+<audio id="music">
 <source src="Aqua - Barbie Girl.mp3" type="audio/mpeg">
 </audio>
 
-<section class="hero">
+<div class="music" onclick="toggleMusic()">🎵</div>
 
-<img src="logo.png" class="logo">
+<section class="hero">
 
 <h1>Lorianna</h1>
 
-<h2>MIS XV AÑOS</h2>
+<p>Mis XV Años</p>
 
-<p>02 • Mayo • 2026</p>
-<p>4:30 PM</p>
+<p>02 Mayo 2026 • 4:30 PM</p>
 
 </section>
 
@@ -177,7 +158,7 @@ Por eso te espero para que juntos festejemos mi primera ilusión.
 
 <p>Hotel y Restaurante Los Pinos</p>
 
-<button onclick="window.open('https://maps.app.goo.gl/6bnJAt3sSRRRQpNd7">
+<button onclick="window.open('https://maps.google.com/?q=9.395985350939837,-83.71526561789925')">
 Ver ubicación
 </button>
 
@@ -211,13 +192,21 @@ Confirmar por WhatsApp
 
 </section>
 
-<section class="footer">
-
-<p>Te espero para celebrar esta noche mágica ✨</p>
-
-</section>
+<div class="footer">
+Te espero para celebrar esta noche mágica ✨
+</div>
 
 <script>
+
+function toggleMusic(){
+let music = document.getElementById("music");
+
+if(music.paused){
+music.play();
+}else{
+music.pause();
+}
+}
 
 const eventDate = new Date("May 2, 2026 16:30:00").getTime();
 
@@ -229,10 +218,9 @@ const distance = eventDate - now;
 const days = Math.floor(distance/(1000*60*60*24));
 const hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
 const minutes = Math.floor((distance%(1000*60*60))/(1000*60));
-const seconds = Math.floor((distance%(1000*60))/1000);
 
 document.getElementById("countdown").innerHTML =
-days+" días "+hours+" h "+minutes+" m "+seconds+" s";
+days+" días "+hours+"h "+minutes+"m";
 
 },1000);
 
@@ -240,3 +228,4 @@ days+" días "+hours+" h "+minutes+" m "+seconds+" s";
 
 </body>
 </html>
+
